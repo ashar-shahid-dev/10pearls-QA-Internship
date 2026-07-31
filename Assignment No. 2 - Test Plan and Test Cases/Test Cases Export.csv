@@ -1,0 +1,87 @@
+Test Case ID,Module,Test Scenario,Test Steps,Expected Result,Priority,Test Type,Status
+TC-01,User Registration,Register with valid user details,"1. Navigate to Registration page
+2. Enter valid name, email, password, confirm password
+3. Click Register",Account is created successfully; user is redirected to login page or logged in automatically; confirmation message is displayed,High,Smoke,Passed
+TC-02,User Registration,Register with an email address that already exists,"1. Navigate to Registration page
+2. Enter a name and an email already registered
+3. Enter password and confirm password
+4. Click Register",System displays an error message stating the email is already registered; account is not created,High,Negative,Failed
+TC-03,User Registration,Register with invalid email format,"1. Navigate to Registration page
+2. Enter name, an invalid email (e.g., 'user@@test')
+3. Enter password and confirm password
+4. Click Register",System displays a validation error for the email field; registration is blocked,Medium,Negative,Passed
+TC-04,User Registration,Register with a required field left empty,"1. Navigate to Registration page
+2. Leave the 'Name' field empty
+3. Fill remaining fields
+4. Click Register",System displays a 'required field' validation message; registration is blocked,Medium,Negative,Passed
+TC-05,User Registration,Register with mismatched password and confirm-password,"1. Navigate to Registration page
+2. Enter valid name and email
+3. Enter different values in Password and Confirm Password
+4. Click Register",System displays a 'passwords do not match' error; registration is blocked,Medium,Negative,Passed
+TC-06,Login & Authentication,Login with valid registered credentials,"1. Navigate to Login page
+2. Enter valid registered email and password
+3. Click Login",User is authenticated and redirected to the homepage/dashboard; username is visible in the header,High,Smoke,Passed
+TC-07,Login & Authentication,Login with an incorrect password,"1. Navigate to Login page
+2. Enter a valid registered email
+3. Enter an incorrect password
+4. Click Login",System displays an 'invalid credentials' error message; user is not logged in,High,Negative,Passed
+TC-08,Login & Authentication,Login with an unregistered email,"1. Navigate to Login page
+2. Enter an email that is not registered
+3. Enter any password
+4. Click Login",System displays an 'invalid credentials' or 'account not found' error; user is not logged in,Medium,Negative,Passed
+TC-09,Login & Authentication,Login with both fields left empty,"1. Navigate to Login page
+2. Leave email and password blank
+3. Click Login",System displays 'required field' validation messages for both fields; login is blocked,Low,Negative,Passed
+TC-10,Login & Authentication,Logout from an active session,"1. Login with valid credentials
+2. Click the Logout option from the account menu",User is logged out and redirected to the login/home page; session is terminated,Medium,Regression,Passed
+TC-11,Browse Book Catalog,View the full book catalog as a guest or logged-in user,1. Navigate to the Book Catalog / Home page,"A list/grid of available books is displayed with title, author, price, and cover image for each book",High,Smoke,Passed
+TC-12,Browse Book Catalog,Navigate through catalog pages using pagination,"1. Navigate to the Book Catalog page
+2. Scroll to the bottom and click 'Next Page' or a page number",The next set of books is displayed correctly without duplicate or missing entries,Medium,Regression,Failed
+TC-13,Browse Book Catalog,Filter catalog by category/genre,"1. Navigate to the Book Catalog page
+2. Select a category filter (e.g., 'Fiction')
+3. Apply the filter",Only books belonging to the selected category are displayed,Medium,Regression,Passed
+TC-14,Search Books,Search for a book by exact title,"1. Navigate to the search bar
+2. Enter the exact title of an existing book
+3. Press Enter / click Search",The matching book is displayed in the search results,High,Smoke,Passed
+TC-15,Search Books,Search for books by author name,"1. Navigate to the search bar
+2. Enter an author's name
+3. Press Enter / click Search",All books written by that author are displayed in the results,Medium,Regression,Passed
+TC-16,Search Books,Search using a partial keyword,"1. Navigate to the search bar
+2. Enter a partial keyword from a book title
+3. Press Enter / click Search",All books whose title contains the keyword are displayed,Medium,Regression,Failed
+TC-17,Search Books,Search for a book that does not exist in the catalog,"1. Navigate to the search bar
+2. Enter a random string that matches no book (e.g., 'xyznotabook123')
+3. Press Enter",System displays a 'No results found' message; no book cards are shown,Medium,Negative,Passed
+TC-18,View Book Details,View details of a selected book,"1. Navigate to the Book Catalog
+2. Click on a book","Book details page opens showing title, author, description, price, availability, and an 'Add to Cart' option",High,Regression,Passed
+TC-19,View Book Details,View details of a book that is out of stock,"1. Navigate to the Book Catalog
+2. Click on a book marked out of stock",Book details page displays an 'Out of Stock' label; 'Add to Cart' button is disabled,Medium,Regression,Passed
+TC-20,Add to Cart,Add a single available book to the cart,"1. Navigate to a book's details page
+2. Click 'Add to Cart'",Book is added to the cart; cart icon count increases by 1; confirmation message is shown,High,Smoke,Failed
+TC-21,Add to Cart,Add multiple different books to the cart,"1. Add Book A to cart
+2. Navigate to Book B and add it to cart
+3. Open the cart",Cart displays both Book A and Book B with correct quantities and a correct subtotal,Medium,Regression,Passed
+TC-22,Add to Cart,Remove a book from the cart,"1. Open the cart with at least one item
+2. Click 'Remove' on a book",The book is removed from the cart; cart total and item count update accordingly,Medium,Regression,Passed
+TC-23,Add to Cart,Attempt to add an out-of-stock book to the cart,"1. Navigate to an out-of-stock book's details page
+2. Attempt to click 'Add to Cart'",Add to Cart' is disabled or an error message is shown; item is not added to the cart,Medium,Negative,Passed
+TC-24,Checkout Process,Complete checkout with valid shipping and payment details,"1. Add a book to cart and proceed to checkout
+2. Enter valid shipping address
+3. Enter valid payment/card details
+4. Click 'Place Order'",Order is placed successfully; order confirmation page/message is displayed,High,Smoke,Passed
+TC-25,Checkout Process,Attempt checkout with an invalid/expired card number,"1. Proceed to checkout with items in cart
+2. Enter a valid shipping address
+3. Enter an invalid or expired card number
+4. Click 'Place Order'",System displays a payment validation error; order is not placed,High,Negative,Passed
+TC-26,Checkout Process,Attempt checkout with an empty shipping address,"1. Proceed to checkout with items in cart
+2. Leave the shipping address field blank
+3. Click 'Place Order'",System displays a 'required field' validation error; order is not placed,Medium,Negative,Passed
+TC-27,Checkout Process,Apply a valid discount/promo code at checkout,"1. Proceed to checkout with items in cart
+2. Enter a valid promo code
+3. Click 'Apply'",Discount is applied; order total updates to reflect the discounted amount,Low,Regression,Passed
+TC-28,Checkout Process,Verify order summary accuracy before payment,"1. Add two different books to the cart
+2. Proceed to checkout
+3. Review the order summary section","Order summary lists correct book titles, quantities, unit prices, and a correctly calculated total",High,Regression,Passed
+TC-29,Order Confirmation,Verify order confirmation message after successful checkout,1. Complete a successful checkout (see TC_CHK_01),"An order confirmation message/page is displayed with an order ID, order summary, and estimated delivery info",High,Regression,Passed
+TC-30,Order Confirmation,Verify order confirmation email is triggered,"1. Complete a successful checkout
+2. Check the inbox of the account's registered email",A confirmation email is received containing the order ID and order details,Medium,Regression,Failed
